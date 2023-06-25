@@ -1,7 +1,17 @@
 <!-- Main navigation container -->
-<nav class="relative flex w-full flex-nowrap items-center justify-between bg-neutral-100 py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:flex-wrap lg:justify-start lg:py-4"
+<nav class="fixed w-full z-10
+top-0 left-1/2 transform -translate-x-1/2 max-w-7xl
+flex flex-nowrap items-center justify-between
+bg-white py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600
+lg:flex-wrap lg:justify-start lg:py-2 lg:px-20 lg:h-11
+text-sm font-bold"
 	data-te-navbar-ref>
 	<div class="flex w-full flex-wrap items-center justify-between px-3">
+		<!-- Logo -->
+		<a class="" routerLink="/">
+			<img src="/assets/logo.png" class="h-6" alt="SmellyCat Logo" loading="lazy" />
+		</a>
+
 		<!-- Hamburger button for mobile view -->
 		<button
 			class="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
@@ -18,31 +28,26 @@
 		</button>
 
 		<!-- Collapsible navbar container -->
-		<div class="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
+		<div class="!visible hidden flex-grow basis-[100%] items-center mt-3 lg:mt-0 lg:!flex lg:basis-auto"
 			id="navbarSupportedContent3" data-te-collapse-item>
-			<!-- Navbar title -->
-			<a class="pr-2 text-xl text-black dark:text-neutral-200" href="#">Navbar</a>
-			<!-- Left links -->
-			<ul class="list-style-none mr-auto flex flex-col pl-0 lg:flex-row" data-te-navbar-nav-ref>
-				<!-- Home link -->
-				<li class="my-4 lg:my-0 lg:pr-2" data-te-nav-item-ref>
-					<a class="active disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-						aria-current="page" href="#" data-te-nav-link-ref>Home</a>
+
+			<!-- Menu -->
+			<ul class="list-style-none ml-auto flex flex-col pl-0 lg:flex-row lg:w-full lg:justify-between lg:ml-[40%]"
+				data-te-navbar-nav-ref>
+				<li class="navbar-menu-li" data-te-nav-item-ref>
+					<a class="navbar-menu-item" routerLink="" data-te-nav-link-ref>Adopt Kittens</a>
 				</li>
-				<!-- Features link -->
-				<li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-					<a class="p-0 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-						href="#" data-te-nav-link-ref>Features</a>
+				<li class="navbar-menu-li" data-te-nav-item-ref>
+					<a class="navbar-menu-item" routerLink="" data-te-nav-link-ref>Kitty Stories</a>
 				</li>
-				<!-- Pricing link -->
-				<li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-					<a class="p-0 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-						href="#" data-te-nav-link-ref>Pricing</a>
+				<li class="navbar-menu-li" data-te-nav-item-ref>
+					<a class="navbar-menu-item" routerLink="" data-te-nav-link-ref>About us</a>
 				</li>
-				<!-- Disabled link -->
-				<li class="lg:pr-2" data-te-nav-link-ref>
-					<a
-						class="text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400">Disabled</a>
+				<li class="navbar-menu-li" data-te-nav-item-ref>
+					<a class="navbar-menu-item" routerLink="" data-te-nav-link-ref>Blog</a>
+				</li>
+				<li class="navbar-menu-li" data-te-nav-item-ref>
+					<a class="navbar-menu-item" routerLink="/contact" data-te-nav-link-ref>Contact</a>
 				</li>
 			</ul>
 		</div>
