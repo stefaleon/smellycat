@@ -6,6 +6,11 @@
 	font-family: 'Manrope', sans-serif;
 }
 
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
 @layer utilities {
 	.navbar-menu-li {
 	  @apply py-2 lg:py-0;
