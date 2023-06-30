@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-contact-form',
@@ -8,18 +9,39 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ContactFormComponent implements OnInit {
   contactForm!: FormGroup;
+  private contactFormValueChanges$ = new Subject<any>();
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.contactForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      city: ['', Validators.required],
-      postalCode: ['', Validators.required],
-      address: ['', Validators.required],
-      message: [''],
-      termsAndConditions: [false, Validators.requiredTrue],
+    let mySessionDataString = sessionStorage.getItem('contact-data');
+
+    console.log(mySessionDataString);
+
+    if (mySessionDataString) {
+      this.contactForm = this.formBuilder.group(
+        JSON.parse(mySessionDataString)
+      );
+    } else {
+      this.contactForm = this.formBuilder.group({
+        name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        city: ['', Validators.required],
+        postalCode: ['', Validators.required],
+        address: ['', Validators.required],
+        message: [''],
+        termsAndConditions: [false, Validators.requiredTrue],
+      });
+    }
+    
+    this.contactForm.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe((formData) => {
+        this.contactFormValueChanges$.next(formData);
+      });
+    
+    this.contactFormValueChanges$.subscribe((formData) => {
+      sessionStorage.setItem('contact-data', JSON.stringify(formData));
     });
   }
 
