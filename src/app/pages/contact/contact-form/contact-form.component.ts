@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, debounceTime } from 'rxjs';
 import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
 import keys from 'keys';
+import { ToastService } from 'src/app/services/toast.service';
 
 const { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY } = keys;
 
@@ -14,8 +15,12 @@ const { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY } = keys;
 export class ContactFormComponent implements OnInit {
   contactForm!: FormGroup;
   private contactFormValueChanges$ = new Subject<any>();
+  toasts: Array<{message: string, type: string}> = [];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+	private formBuilder: FormBuilder,
+	protected toastService: ToastService
+) {}
 
   ngOnInit() {
     let mySessionDataString = sessionStorage.getItem('contact-data');
@@ -37,6 +42,17 @@ export class ContactFormComponent implements OnInit {
     this.contactFormValueChanges$.subscribe((formData) => {
       sessionStorage.setItem('contact-data', JSON.stringify(formData));
     });
+
+	this.toastService.getToastObservable().subscribe((toast) => {
+		this.toasts.push(toast);
+
+		console.log('toasts', this.toasts)
+		setTimeout(() => this.removeToast(), 3000);
+	  });
+  }
+
+  removeToast() {
+    this.toasts.shift();
   }
 
   setInitialFormData() {
@@ -77,12 +93,12 @@ export class ContactFormComponent implements OnInit {
       )
       .then(
         (res: EmailJSResponseStatus) => {          
-		  alert('Email sent successfully');
+		  this.toastService.show('Email sent successfully', 'success');
 		  sessionStorage.removeItem('contact-data');          
 		  this.setInitialFormData();		  
         },
         (error) => {
-          alert('Failed to send email');
+		  this.toastService.show('Failed to send email', 'error');
         }
       );
   }

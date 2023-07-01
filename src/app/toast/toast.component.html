@@ -1,0 +1,9 @@
+<div class="fixed inset-0 flex items-center justify-center z-50">
+	<div class="bg-gray-800 opacity-50 absolute inset-0"></div>
+	<div [ngClass]="{'bg-[#dc3545]': toast.type === 'error', 'bg-[#28a745]': toast.type === 'success'}"
+		class="z-10 rounded-md p-5 w-4/5 max-w-md">
+		<div class="text-white text-lg text-center">
+			<p>{{ toast.message }}</p>
+		</div>					
+	</div>
+</div>
