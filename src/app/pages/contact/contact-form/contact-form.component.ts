@@ -25,15 +25,7 @@ export class ContactFormComponent implements OnInit {
         JSON.parse(mySessionDataString)
       );
     } else {
-      this.contactForm = this.formBuilder.group({
-        name: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        city: ['', Validators.required],
-        postalCode: ['', Validators.required],
-        address: ['', Validators.required],
-        message: [''],
-        termsAndConditions: [false, Validators.requiredTrue],
-      });
+		this.setInitialFormData();      
     }
     
     this.contactForm.valueChanges
@@ -44,6 +36,18 @@ export class ContactFormComponent implements OnInit {
     
     this.contactFormValueChanges$.subscribe((formData) => {
       sessionStorage.setItem('contact-data', JSON.stringify(formData));
+    });
+  }
+
+  setInitialFormData() {
+	this.contactForm = this.formBuilder.group({
+        name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        city: ['', Validators.required],
+        postalCode: ['', Validators.required],
+        address: ['', Validators.required],
+        message: [''],
+        termsAndConditions: [false, Validators.requiredTrue],
     });
   }
  
@@ -63,8 +67,7 @@ export class ContactFormComponent implements OnInit {
     }
   }
 
-  sendEmail(formData: any) {
-    console.log('Sending email...');
+  sendEmail(formData: any) {    
     emailjs
       .send(
         EMAILJS_SERVICE_ID,
@@ -73,13 +76,13 @@ export class ContactFormComponent implements OnInit {
         EMAILJS_PUBLIC_KEY
       )
       .then(
-        (res: EmailJSResponseStatus) => {
-          console.log(res.text);
-		  // TODO: Clear form and popup a success message       
+        (res: EmailJSResponseStatus) => {          
+		  alert('Email sent successfully');
+		  sessionStorage.removeItem('contact-data');          
+		  this.setInitialFormData();		  
         },
         (error) => {
-          console.log(error.text);
-		  // TODO: Popup an error message       
+          alert('Failed to send email');
         }
       );
   }
