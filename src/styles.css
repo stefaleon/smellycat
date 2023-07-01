@@ -27,8 +27,4 @@ html, body {
 		ring-1 ring-gray-300 
 		focus:outline-none focus:ring-1 focus:ring-gray-400;
 	}	
-
-	.hscreen-minus-170 {
-		height: calc(100vh - 170px)
-	}
   }

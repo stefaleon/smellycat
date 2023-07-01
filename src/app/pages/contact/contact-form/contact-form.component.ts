@@ -44,9 +44,7 @@ export class ContactFormComponent implements OnInit {
     });
 
 	this.toastService.getToastObservable().subscribe((toast) => {
-		this.toasts.push(toast);
-
-		console.log('toasts', this.toasts)
+		this.toasts.push(toast);		
 		setTimeout(() => this.removeToast(), 3000);
 	  });
   }
