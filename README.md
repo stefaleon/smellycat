@@ -1,27 +1,35 @@
-# Smellycat
+# SmellyCat
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
+Webpage of the company “SmellyCat”
 
-## Development server
+### EmailJS integration
+On contact form submission an email is sent.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+#### EmailJS configuration
 
-## Code scaffolding
+In order to do so, an active [EmailJS](https://www.emailjs.com/) account is required.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- After setting up an account, the following keys are required:
 
-## Build
+	- EMAILJS_PUBLIC_KEY: This can be found in the account settings.
+	- EMAILJS_SERVICE_ID: This is available after [a service is configured](https://www.emailjs.com/docs/tutorial/adding-email-service/).
+	- EMAILJS_TEMPLATE_ID: This is available after [a template is configured](https://www.emailjs.com/docs/tutorial/creating-email-template/).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- For the SmellyCat contact form, the template may look similar to the example below
 
-## Running unit tests
+![template example](https://i.imgur.com/hLpIgUf.jpg)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Provide the required keys
 
-## Running end-to-end tests
+In the app root create a file named **keys.ts** with the following content
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+*keys.ts*
+```
+const keys = {
+  EMAILJS_SERVICE_ID: 'XXXX',
+  EMAILJS_TEMPLATE_ID: 'XXXX',
+  EMAILJS_PUBLIC_KEY: 'XXXX',
+};
+```
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Replace the **XXXX** placeholders with the corresponding EmalJS configuration values.

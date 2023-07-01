@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, debounceTime } from 'rxjs';
+import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
+import keys from 'keys';
+
+const { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY } = keys;
 
 @Component({
   selector: 'app-contact-form',
@@ -15,8 +19,6 @@ export class ContactFormComponent implements OnInit {
 
   ngOnInit() {
     let mySessionDataString = sessionStorage.getItem('contact-data');
-
-    console.log(mySessionDataString);
 
     if (mySessionDataString) {
       this.contactForm = this.formBuilder.group(
@@ -44,12 +46,41 @@ export class ContactFormComponent implements OnInit {
       sessionStorage.setItem('contact-data', JSON.stringify(formData));
     });
   }
-
-  onSubmit() {
+ 
+  onSubmit(event: Event) {
+    event.preventDefault();
     if (this.contactForm.valid) {
-      // Process the form data here
-      console.log(this.contactForm.value);
-      // Clear form
+      const formData = {
+        name: this.contactForm.get('name')?.value,
+        email: this.contactForm.get('email')?.value,
+        message: this.contactForm.get('message')?.value,
+		city: this.contactForm.get('city')?.value,
+		postalCode: this.contactForm.get('postalCode')?.value,
+		address: this.contactForm.get('address')?.value,
+      };
+      
+      this.sendEmail(formData);
     }
+  }
+
+  sendEmail(formData: any) {
+    console.log('Sending email...');
+    emailjs
+      .send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formData,
+        EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        (res: EmailJSResponseStatus) => {
+          console.log(res.text);
+		  // TODO: Clear form and popup a success message       
+        },
+        (error) => {
+          console.log(error.text);
+		  // TODO: Popup an error message       
+        }
+      );
   }
 }

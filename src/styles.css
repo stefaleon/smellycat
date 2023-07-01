@@ -23,7 +23,9 @@ html, body {
 		@apply text-xs font-semibold mt-2;
 	}
 	.form-input {
-		@apply w-full px-2 py-1 rounded-sm focus:outline-none focus:ring-1;
+		@apply w-full px-2 py-1 rounded-sm 
+		ring-1 ring-gray-300 
+		focus:outline-none focus:ring-1 focus:ring-gray-400;
 	}	
 
 	.hscreen-minus-170 {
