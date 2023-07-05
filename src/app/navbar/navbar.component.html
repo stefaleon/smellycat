@@ -1,53 +1,60 @@
-<!-- Main navigation container -->
 <nav class="fixed w-full z-10
 top-0 left-1/2 transform -translate-x-1/2 max-w-7xl
 flex flex-nowrap items-center justify-between
 bg-white py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600
-lg:flex-wrap lg:justify-start lg:py-2 lg:px-20 lg:h-11
-text-sm font-bold"
-	data-te-navbar-ref>
+lg:flex-wrap lg:justify-start 
+px-1 lg:px-20 lg:h-11
+text-sm font-bold">
 	<div class="flex w-full flex-wrap items-center justify-between px-3">
-		<!-- Logo -->
 		<a class="" routerLink="/">
 			<img src="/assets/logo.png" class="h-6" alt="SmellyCat Logo" loading="lazy" />
 		</a>
 
-		<!-- Hamburger button for mobile view -->
-		<button
-			class="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
-			type="button" data-te-collapse-init data-te-target="#navbarSupportedContent3"
-			aria-controls="navbarSupportedContent3" aria-expanded="false" aria-label="Toggle navigation">
-			<!-- Hamburger icon -->
-			<span class="[&>svg]:w-7">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-7 w-7">
-					<path fill-rule="evenodd"
-						d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
-						clip-rule="evenodd" />
+		<div class="lg:hidden">
+			<button type="button" class="text-gray-500 hover:text-gray-400 focus:text-gray-500" (click)="toggleDropdown()">
+				<svg class="h-6 w-6 fill-current" viewBox="0 0 20 20">
+					<path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+						stroke-linejoin="round" />
 				</svg>
-			</span>
-		</button>
+			</button>			
+		</div>
 
-		<!-- Collapsible navbar container -->
-		<div class="!visible hidden flex-grow basis-[100%] items-center mt-3 lg:mt-0 lg:!flex lg:basis-auto"
-			id="navbarSupportedContent3" data-te-collapse-item>
+		<div class="dropdown-menu" [ngClass]="{'hidden': !showDropdown}">			
+			<ul class="list-style-none ml-auto flex flex-col pl-0 lg:hidden">
+				<li class="dropdown-menu-li">
+					<a class="dropdown-menu-item" routerLink="">Adopt Kittens</a>
+				</li>
+				<li class="dropdown-menu-li">
+					<a class="dropdown-menu-item" routerLink="">Kitty Stories</a>
+				</li>
+				<li class="dropdown-menu-li">
+					<a class="dropdown-menu-item" routerLink="">About us</a>
+				</li>
+				<li class="dropdown-menu-li">
+					<a class="dropdown-menu-item" routerLink="">Blog</a>
+				</li>
+				<li class="dropdown-menu-li">
+					<a class="dropdown-menu-item" routerLink="/contact">Contact</a>
+				</li>
+			</ul>
+		  </div>
 
-			<!-- Menu -->
-			<ul class="list-style-none ml-auto flex flex-col pl-0 lg:flex-row lg:w-full lg:justify-between lg:ml-[40%]"
-				data-te-navbar-nav-ref>
-				<li class="navbar-menu-li" data-te-nav-item-ref>
-					<a class="navbar-menu-item" routerLink="" data-te-nav-link-ref>Adopt Kittens</a>
+		<div class="pt-3 lg:pt-0 hidden lg:flex lg:basis-auto flex-grow basis-[100%] items-center">
+			<ul class="list-style-none ml-auto flex flex-col pl-0 lg:flex-row lg:w-full lg:justify-between lg:ml-[40%]">
+				<li class="navbar-menu-li">
+					<a class="navbar-menu-item" routerLink="">Adopt Kittens</a>
 				</li>
-				<li class="navbar-menu-li" data-te-nav-item-ref>
-					<a class="navbar-menu-item" routerLink="" data-te-nav-link-ref>Kitty Stories</a>
+				<li class="navbar-menu-li">
+					<a class="navbar-menu-item" routerLink="">Kitty Stories</a>
 				</li>
-				<li class="navbar-menu-li" data-te-nav-item-ref>
-					<a class="navbar-menu-item" routerLink="" data-te-nav-link-ref>About us</a>
+				<li class="navbar-menu-li">
+					<a class="navbar-menu-item" routerLink="">About us</a>
 				</li>
-				<li class="navbar-menu-li" data-te-nav-item-ref>
-					<a class="navbar-menu-item" routerLink="" data-te-nav-link-ref>Blog</a>
+				<li class="navbar-menu-li">
+					<a class="navbar-menu-item" routerLink="">Blog</a>
 				</li>
-				<li class="navbar-menu-li" data-te-nav-item-ref>
-					<a class="navbar-menu-item" routerLink="/contact" data-te-nav-link-ref>Contact</a>
+				<li class="navbar-menu-li">
+					<a class="navbar-menu-item" routerLink="/contact">Contact</a>
 				</li>
 			</ul>
 		</div>

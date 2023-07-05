@@ -1,13 +1,24 @@
-import { Component } from '@angular/core';
-import { Collapse, Dropdown, initTE } from 'tw-elements';
+import { Component, HostListener, ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  ngOnInit() {
-    initTE({ Collapse, Dropdown });
+  showDropdown = false;
+
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!this.elementRef.nativeElement.contains(target)) {
+      this.showDropdown = false;
+    }
+  }
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
   }
 }

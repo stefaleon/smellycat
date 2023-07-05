@@ -1,0 +1,21 @@
+  .dropdown-menu {
+	position: absolute;
+	right: 0;
+	top: 100%;	
+	padding: 0 0.5rem;
+	width: 100%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+	display: none;
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transform-origin: top;
+  }
+  
+  .dropdown-menu.hidden {
+	transform: scaleY(0);
+  }
+  
+  .dropdown-menu {
+	display: block;
+	transform: scaleY(1);
+  }
+  
