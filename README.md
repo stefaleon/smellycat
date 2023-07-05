@@ -1,35 +1,37 @@
-# SmellyCat
+# Surge deployment
+## CSR rendering issue workaround
 
-Webpage of the company “SmellyCat”
+When you reload a page in a client-side rendered (CSR) Angular app, the request is sent to the server. However, Surge is a static file hosting service and doesn't handle server-side routing by default. This means that when you reload a specific route, the server doesn't know how to handle it and returns a "Not Found" error.
 
-### EmailJS integration
-On contact form submission an email is sent.
 
-#### EmailJS configuration
+*This is a workaround rather than a proper fix, since instead of displaying the existing route on reload, we redirect to the root*
+- After building, include a **200.html** file inside the build folder (in our case *./dist/smellycat*).
 
-In order to do so, an active [EmailJS](https://www.emailjs.com/) account is required.
-
-- After setting up an account, the following keys are required:
-
-	- EMAILJS_PUBLIC_KEY: This can be found in the account settings.
-	- EMAILJS_SERVICE_ID: This is available after [a service is configured](https://www.emailjs.com/docs/tutorial/adding-email-service/).
-	- EMAILJS_TEMPLATE_ID: This is available after [a template is configured](https://www.emailjs.com/docs/tutorial/creating-email-template/).
-
-- For the SmellyCat contact form, the template may look similar to the example below
-
-![template example](https://i.imgur.com/hLpIgUf.jpg)
-
-#### Provide the required keys
-
-In the app root create a file named **keys.ts** with the following content
-
-*keys.ts*
+*200.html*
 ```
-const keys = {
-  EMAILJS_SERVICE_ID: 'XXXX',
-  EMAILJS_TEMPLATE_ID: 'XXXX',
-  EMAILJS_PUBLIC_KEY: 'XXXX',
-};
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Angular App</title>
+  </head>
+  <body>
+    <script>
+      // Redirect to index.html
+      (function () {
+        var path = window.location.pathname;
+        if (path !== '/' && !path.includes('static')) {
+          window.location.replace('/index.html');
+        }
+      })();
+    </script>
+  </body>
+</html>
 ```
 
-Replace the **XXXX** placeholders with the corresponding EmalJS configuration values.
+- Redeploy with
+```
+npx surge --project ./dist/smellycat --domain smellycat.surge.sh
+```
+
+
