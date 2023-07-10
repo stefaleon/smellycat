@@ -11,6 +11,7 @@ import { ContactFormComponent } from './pages/contact/contact-form/contact-form.
 import { ContactDataComponent } from './pages/contact/contact-data/contact-data.component';
 import { MapComponent } from './pages/contact/contact-data/map/map.component';
 import { ToastComponent } from './toast/toast.component';
+import { BlogComponent } from './pages/blog/blog.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ToastComponent } from './toast/toast.component';
     ContactFormComponent,
     ContactDataComponent,
     MapComponent,
-    ToastComponent
+    ToastComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
