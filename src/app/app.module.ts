@@ -12,6 +12,7 @@ import { ContactDataComponent } from './pages/contact/contact-data/contact-data.
 import { MapComponent } from './pages/contact/contact-data/map/map.component';
 import { ToastComponent } from './toast/toast.component';
 import { BlogComponent } from './pages/blog/blog.component';
+import { PageComponent } from './page/page.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { BlogComponent } from './pages/blog/blog.component';
     ContactDataComponent,
     MapComponent,
     ToastComponent,
-    BlogComponent
+    BlogComponent,
+    PageComponent
   ],
   imports: [
     BrowserModule,
